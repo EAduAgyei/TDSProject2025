@@ -1,0 +1,49 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import statsmodels.formula.api as smf
+import seaborn as sns
+import numpy as np
+
+depression = pd.read_csv("Student Depression Dataset.csv")
+depression
+
+depression.head()
+
+depression.describe(include = "all")
+
+len(depression)
+
+depression.describe(include = ["O"])
+
+depression2 = depression.dropna()
+depression2
+
+fam_count = depression2["Family History of Mental Illness"].value_counts()
+fam_count.plot(kind = "bar")
+plt.ylabel("Number of Students")
+plt.title("Poll Results of Students and Family History of Mental Illness")
+
+sns.relplot(x = "Sleep Duration", y = "CGPA", hue = "Degree", kind = "line", data = depression2)
+plt.title("Sleep Duration vs. CGPA")
+
+sns.relplot(x = "Work/Study Hours", y = "CGPA", hue = "Degree", kind = "line", data = depression2)
+plt.title("Work/Study Hours vs. CGPA")
+
+sns.jointplot(x = "Study Satisfaction", y = "CGPA", hue = "Degree",kind = "kde", data = depression2)
+plt.title("Study Satisfaction vs. CGPA")
+
+depression_filter = depression2["CGPA"] > 0
+depression_filter2 = depression2[depression_filter]
+
+sns.jointplot(x = "Study Satisfaction", y = "CGPA", hue = "Degree",kind = "kde", data = depression_filter2)
+plt.title("Study Satisfaction vs. CGPA")
+
+gpa_filter = depression2[(depression2["CGPA"] >= 0.0) & (depression2["CGPA"] <= 10.00) & (depression2["Academic Pressure"] < 5.0 )]
+gpa_filter
+
+sns.relplot(x ="Academic Pressure", y = "CGPA", hue = "Degree", data = gpa_filter, kind = "line")
+plt.title("Academic Pressure vs. CGPA")
+
+h = sns.catplot(x = "Have you ever had suicidal thoughts ?", y = "Depression", hue = "Age", kind = "bar", data = depression2)
+h.fig.set_size_inches(15,5)
+plt.title("Suicidal Thoughts and Depression Effects in Age")
