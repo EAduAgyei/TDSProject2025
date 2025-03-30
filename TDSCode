@@ -1,0 +1,14 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import statsmodels.formula.api as smf
+import seaborn as sns
+import numpy as np
+
+depression = pd.read_csv("Student Depression Dataset.csv")
+depression
+
+depression.head()
+
+sns.jointplot (x = "Study Satisfaction", y = "CGPA", hue = "Degree",kind = "kde", data = depression2) 
+
+sns.relplot(x = "Work/Study Hours", y = "CGPA", hue = "Degree", kind = "line", data = depression2)
