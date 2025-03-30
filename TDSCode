@@ -9,6 +9,15 @@ depression
 
 depression.head()
 
+depression.describe(include = "all")
+
+len(depression)
+
+depression.describe(include = ["O"])
+
+depression2 = depression.dropna()
+depression2
+
 sns.jointplot (x = "Study Satisfaction", y = "CGPA", hue = "Degree",kind = "kde", data = depression2) 
 
 sns.relplot(x = "Work/Study Hours", y = "CGPA", hue = "Degree", kind = "line", data = depression2)
